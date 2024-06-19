@@ -1,4 +1,5 @@
 const express = require('express')
+const mongoose = require('mongoose');
 const cowsay = require('cowsay')
 const app = express()
 const port = 3000
@@ -11,21 +12,20 @@ const morgan = require('./middlewares/morgan');
 app.use(morgan(':method :host :status :param[id] - :response-time ms :body'));
 
 // Rutas
-const productsApiRoutes = require("./routes/productsApi.routes")
+//const productsApiRoutes = require("./routes/productsApi.routes")
 const productsRoutes = require("./routes/products.routes")
-// const entriesApiRoutes = require("./routes/entriesApi.routes")
+const providerRoutes = require("./routes/providers.routes")
+//const entriesApiRoutes = require("./routes/entriesApi.routes")
 
-app.use(express.json()); // Habilito recepción de JSON en servidor
-
+app.use(express.json()); 
 // Rutas
 //API
-app.use('/api/products',productsApiRoutes);
+//app.use('/api/products',productsApiRoutes);
+app.use('/api',providerRoutes);
+
 
 //WEB
-app.use('/products',productsRoutes);
-
-// Para rutas no existentes
-app.use('*',error404);
+app.use('/api',productsRoutes);
 
 app.listen(port, () => {
   console.log(
@@ -35,3 +35,4 @@ app.listen(port, () => {
           T: "U "
       }))
 })
+

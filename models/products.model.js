@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 require('../config/db_mongo') // Conexión a BBDD MongoDB
 
 const objectSchema = {
@@ -32,6 +33,11 @@ const objectSchema = {
             }, 
             message: "Porfa, sólo imágenes JPG o PNG"
         }
+    },
+    provider:{
+        type: Schema.Types.ObjectId, 
+        ref: 'Provider', 
+        required: true
     }
 };
 // Crear el esquema
