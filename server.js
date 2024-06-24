@@ -2,7 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose');
 const cowsay = require('cowsay')
 const app = express()
-const port = 3000
+const port = process.env.port
+
 
 // Middlewares
 const error404 = require('./middlewares/error404');
@@ -38,7 +39,7 @@ app.listen(port, () => {
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://antonioglezt98:O6QVWDaTSYVVTbTr@clusterprueba.4kuzch9.mongodb.net/?retryWrites=true&w=majority&appName=ClusterPrueba"
+const uri = "mongodb+srv://anto:8ubwIkBFoKMVtVwg@clusterprueba.4kuzch9.mongodb.net/ClusterPrueba?retryWrites=true&w=majority&appName=ClusterPrueba"
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
