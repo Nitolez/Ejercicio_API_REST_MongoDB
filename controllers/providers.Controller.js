@@ -1,4 +1,5 @@
 const Provider = require('../models/provider.model');
+const { validationResult } = require("express-validator");
 
 // Obtener todos los providers
 const getAllProviders = async (req, res) => {
@@ -11,16 +12,36 @@ const getAllProviders = async (req, res) => {
 };
 
 // Crear un nuevo provider
-const createProvider = async (req, res) => {
-  const { company_name, CIF, address, url_web } = req.body;
+const createProvider = async (req, res, next) => {
+//   const { company_name, CIF, address, url_web } = req.body;
 
-  try {
-    const newProvider = new Provider({ company_name, CIF, address, url_web });
-    await newProvider.save();
-    res.status(201).json(newProvider);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+//   try {
+//     const newProvider = new Provider({ company_name, CIF, address, url_web });
+//     await newProvider.save();
+//     res.status(201).json(newProvider);
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// };
+try {
+  const errors = validationResult(req);
+
+  // if there is error then return Error
+  if (!errors.isEmpty()) {
+      return res.status(400).json({
+          success: false,
+          errors: errors.array(),
+      });
   }
+
+  // do some operation - like save data to DB (eg mongodb)
+  // dummy code
+  // User.create(req.body);
+
+  res.json({ success: true });
+} catch (err) {
+  next(err);
+}
 };
 
 // Actualizar un provider

@@ -4,7 +4,7 @@ require('../config/db_mongo') // Conexión a BBDD MongoDB
 
 const objectSchema = {
     id: { 
-        type: Number, 
+        type: String, 
         required: true,
         unique: true
     },
@@ -37,7 +37,7 @@ const objectSchema = {
     provider:{
         type: Schema.Types.ObjectId, 
         ref: 'Provider', 
-        required: true
+       /*  required: true */
     }
 };
 // Crear el esquema
